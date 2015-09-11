@@ -10,11 +10,12 @@
 */
 int determine_card_number(char card_name[])
 {
+	puts("We are in determine_card_number");
 	int val;
-	while (card_name[0] != 'x')
+
+	switch(card_name[0])
 	{
-		switch(card_name[0])
-		{
+	
 		case 'K':
 		case 'Q':
 		case 'J':
@@ -22,36 +23,47 @@ int determine_card_number(char card_name[])
 			break;
 		case 'A':
 			val = 11;
-			break;
-		case 'X':
-			continue;
+			break; 
 		default:
 			val = atoi(card_name);
 			if ((val < 1) || (val > 10)) 
 			{
 				puts("I don't understand that value!");
-				continue;
 			}
-		}
 	}
-	
+
 	return val;
 }
+
+/* 
+* This function will update the count based on the 
+* value of the card
+*/
+int update_count(int old_count, int card_val)
+{
+	if ((card_val>2) && (card_val < 7))
+		{
+			old_count++;
+		} else if (card_val == 10)
+		{
+			old_count--;
+		}
+	return old_count;
+}
+
 
 int main()
 {
 	char card_name[3];
 	int count = 0;
+	while (card_name[0] != 'x')
+	{
 		puts("Enter the card_name: ");
 		scanf("%2s", card_name);
 		int val = determine_card_number(card_name);
-		if ((val>2) && (val < 7))
-		{
-			count++;
-		} else if (val == 10)
-		{
-			count--;
-		}
+		printf("in main, the val is %i\n", val);
+		count = update_count(count, val);
 		printf("Current Count: %i\n", count);
+	}
 	return 0;
 }
