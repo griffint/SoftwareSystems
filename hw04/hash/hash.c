@@ -15,11 +15,11 @@ License: Creative Commons Attribution-ShareAlike 3.0
 /* Here's one way of making a polymorphic object in C */
 
 typedef struct {
-    enum Type {INT, STRING} type;
+    enum Type {INT, STRING} type; //what type is it
     union {
 	int i;
 	char *s;
-    };
+    }; //will either be an int or char
 } Value;
 
 
@@ -72,7 +72,7 @@ equal is a pointer to a function that knows how to compare keys.
 
  */
 
-typedef struct {
+typedef struct { //represents keys in the hashtable
     void *key;
     int (*hash) (void *);
     int (*equal) (void *, void *);
@@ -102,9 +102,9 @@ void print_hashable(Hashable *hashable)
 
 
 /* Hashes an integer. */
-int hash_int(void *p)
+int hash_int(void *p) //what is the purpose of this
 {
-    return *(int *)p;
+    return *(int *)p; //casts p to a pointer type and returns a pointer to it
 }
 
 
@@ -119,38 +119,42 @@ int hash_string(void *p)
 	total += s[i];
 	i++;
     }
-    return total;
+    return total; //seems to total the int values of all the chars in string and return that total
 }
 
 
 /* Hashes any Hashable. */
 int hash_hashable(Hashable *hashable)
 {
-    return hashable->hash (hashable->key);
+    return hashable->hash (hashable->key); //executes the hash function on the key
 }
 
 
 /* Compares integers. */
 int equal_int (void *ip, void *jp)
 {
-    // FIX ME!
-    return 0;
+
+    return return *(int *)ip == *(int *)jp;;
 }
 
 
 /* Compares strings. */
 int equal_string (void *s1, void *s2)
 {
-    // FIX ME!
-    return 0;
+    //cast both to char type, use srtcmp
+    int x = strcmp ((char *) s1, (char *) s2);
+    return (x == 0);
 }
 
 
 /* Compares Hashables. */
 int equal_hashable(Hashable *h1, Hashable *h2)
 {
-    // FIX ME!
-    return 0;
+    //first check if the hashable structs have the same hash function
+    //if not then they're not the same type
+    if (h1->equal != h2->equal) return 0;
+    return h1->equal(h1->key, h2->key);
+
 }
 
 

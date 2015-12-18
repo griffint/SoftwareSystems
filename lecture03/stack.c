@@ -14,9 +14,9 @@ int *foo() {
     int i;
     int array[SIZE];
 
-    printf("%p\n", array);
+    //printf("%p\n", array);
 
-    for (i=0; i<SIZE; i++) {
+    for (i=0; i<SIZE; i++) { //this loop will add stuff to the array
 	array[i] = 17;
     }
     return array;
@@ -26,7 +26,7 @@ void bar() {
     int i;
     int array[SIZE];
 
-    printf("%p\n", array);
+    //printf("%p\n", array);
 
     for (i=0; i<SIZE; i++) {
 	array[i] = i;

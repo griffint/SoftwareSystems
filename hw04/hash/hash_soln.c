@@ -1,8 +1,6 @@
 /* Example code for Software Systems at Olin College.
-
 Copyright 2012 Allen Downey
 License: Creative Commons Attribution-ShareAlike 3.0
-
 */
 
 #include <stdio.h>
@@ -63,13 +61,10 @@ void print_value (Value *value)
 // HASHABLE: Represents a key in a key-value pair.
 
 /* Here's another way to make a polymorphic object.
-
 The key can be any pointer type.  It's stored as a (void *), so
 when you extract it, you have to cast it back to whatever it is.
-
 hash is a pointer to a function that knows how to hash the key.
 equal is a pointer to a function that knows how to compare keys.
-
  */
 
 typedef struct {
@@ -158,7 +153,6 @@ int equal_hashable(Hashable *h1, Hashable *h2)
 
 
 /* Makes a Hashable int. 
-
 Allocates space and copies the int.
 */
 Hashable *make_hashable_int (int x)
@@ -170,7 +164,6 @@ Hashable *make_hashable_int (int x)
 
 
 /* Makes a Hashable string. 
-
 Stores a reference to the string (not a copy).
 */
 Hashable *make_hashable_string (char *s)
@@ -222,7 +215,6 @@ void print_list(Node *node)
 
 
 /* Prepends a new key-value pair onto a list.
-
 This is actually a synonym for make_node.
  */
 Node *prepend(Hashable *key, Value *value, Node *rest)
